@@ -39,7 +39,7 @@ const MovieDetails = () => {
 
   const fetchMovies = async () => {
     try {
-      const response = await axios.get(`/back/movieList?search=${searchQuery}`);
+      const response = await axios.get(`http://localhost:3500/api/movieList?search=${searchQuery}`);
       setMovies(response.data);
     } catch (error) {
       console.error(error);
@@ -50,7 +50,7 @@ const MovieDetails = () => {
     const confirmDelete = window.confirm('Are you sure you want to delete this movie?');
     if (confirmDelete) {
       try {
-        await axios.delete(`/back/delete/${id}`);
+        await axios.delete(`http://localhost:3500/api/delete/${id}`);
         setMovies((prevMovies) => prevMovies.filter((movie) => movie._id !== id));
       } catch (error) {
         console.error(error);
@@ -85,7 +85,7 @@ const MovieDetails = () => {
 
   const handleUpdateClick = async () => {
     try {
-      await axios.put(`/back/updateitem/${editedMovie._id}`, editedMovie);
+      await axios.put(`http://localhost:3500/api/updateitem/${editedMovie._id}`, editedMovie);
       setMovies((prevMovies) =>
         prevMovies.map((movie) => (movie._id === editedMovie._id ? editedMovie : movie))
       );
